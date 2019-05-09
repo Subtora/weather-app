@@ -4,9 +4,11 @@ import ReactDOM from "react-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { lat: null, errorMessage: "" };
+  }
 
+  componentDidMount() {
+    console.log("Component Mounted");
     window.navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -20,7 +22,15 @@ class App extends React.Component {
       }
     );
   }
+
+  componentDidUpdate() {
+    console.log("Component Re-Rendered");
+  }
+  componentWillUnmount() {
+    console.log("Component Un-Mounted");
+  }
   render() {
+    console.log("Component Rendered");
     if (this.state.lat === null && this.state.errorMessage === "") {
       return <div>loading...</div>;
     } else {
